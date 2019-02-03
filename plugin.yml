@@ -1,0 +1,13 @@
+name: YMenu
+api: ["1.0.0"]
+version: "1.0.0"
+load: POSTWORLD
+main: yxmingy.ymenu.Main
+commands:
+ menu:
+  description: "召唤菜单"
+  usage: "/menu [菜单名]"
+  permission: yxming.command.menu
+permissions:
+ yxming.command.menu: 
+ default: true
