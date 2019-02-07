@@ -7,7 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import cn.nukkit.Player;
-import cn.nukkit.block.BlockButtonStone;
 import cn.nukkit.command.*;
 
 
@@ -27,7 +26,7 @@ public class Main extends PluginBase{
 		 *   ]
 		 * ]
 		 */
-		getServer().getPluginManager().registerEvents(new Responser(), this);;
+		getServer().getPluginManager().registerEvents(new Responser(), this);
 	}
 	public void onDisable() {
 		getLogger().warning("YMenu is Turned Off!");
@@ -43,10 +42,24 @@ public class Main extends PluginBase{
 			sender.sendMessage("控制台去死！");
 			return true;
 		}
-		LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>(),
-				                          buttons = new LinkedHashMap<String, Object>();
+		Map<String, Object> data = new LinkedHashMap<String, Object>(),
+				            buttons = new LinkedHashMap<String, Object>(),
+				            pair,button,image;
+		int i = 0;            
 		data.put("type", "form");
 		data.put("title", args[0]);
+		for(Map.Entry<String, Object> entry : ((LinkedHashMap<String,Object>)(conf.get(args[0]))).entrySet()){
+		    pair = (Map<String,Object>)entry.getValue();
+		    button = new LinkedHashMap<String, Object>();
+		       image = new LinkedHashMap<String, Object>();
+		    button.put("text",entry.getKey());
+		       image.put("type","path");
+		       image.put("data",pair.get("图标"));
+		    button.put("image",image);
+		    buttons.put(String.valueOf(i),button);
+		    i++;
+		}
+		data.put("buttons",buttons);
 		
 		UISender.sendUI(526817087, data, (Player)sender);
 		return true;
