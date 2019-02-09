@@ -7,7 +7,7 @@ commands:
  menu:
   description: "召唤菜单"
   usage: "/menu [菜单名]"
-  permission: yxming.command.menu
+  permission: yxmingy.command.menu
 permissions:
- yxming.command.menu: 
- default: true
+ yxmingy.command.menu: 
+  default: true
