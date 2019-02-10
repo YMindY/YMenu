@@ -54,14 +54,14 @@ public class Main extends PluginBase{
 		String imagepath;
 		data.put("type", "form");
 		data.put("title", args[0]);
-		data.put("content",args[0]);
+		data.put("content","");
 		for(Map.Entry<String, Object> entry : btconf.entrySet()){
 		    pair = (Map<String,Object>)entry.getValue();
 		    button = new LinkedHashMap<String, Object>();
+		    button.put("text",entry.getKey());
 		    imagepath = (String)pair.get("图标");
 		    if(!(imagepath.equals("无"))){
 		        image = new LinkedHashMap<String, Object>();
-		        button.put("text",entry.getKey());
 		        image.put("type","path");
 		        image.put("data",imagepath);
 		        button.put("image",image);
