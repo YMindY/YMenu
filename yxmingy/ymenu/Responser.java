@@ -1,8 +1,10 @@
 package yxmingy.ymenu;
 
 import cn.nukkit.Player;
+import cn.nukkit.command.ConsoleCommandSender;
+import java.util.*;
 import yxmingy.ymenu.Responser;
-import yxmingy.yupi.ResponserBase;
+import yxmingy.yupi.*;
 
 public class Responser extends ResponserBase{
     private Main own;
@@ -10,9 +12,32 @@ public class Responser extends ResponserBase{
       own = _own;
     }
 	public void response(int id,String index,Player player) {
-	    for(String key : own.conf.getAll().keySet()){
-	      if(Main.buildId(key)==id){
-	        player.sendMessage(String.valueOf(index.length())+"["+index+"]");
+	    for(Map.Entry<String,Object> e : own.conf.getAll().entrySet()){
+	      if(Utils.buildId(e.getKey())==id){
+	        Map<String,Object> button,btconf = (LinkedHashMap<String,Object>)(e.getValue());
+	        for(Object pair : btconf.values()){
+	          button = (Map<String,Object>)pair;
+	          String sender,cmd;
+	          cmd = (String)button.get("指令");
+	          sender = cmd.substring(0,4);
+	          cmd = cmd.substring(5);
+	          switch(sender){
+	          case "%py:":
+	            own.getServer().dispatchCommand(player,cmd);
+	          break;
+	          case "%op:":
+	            boolean isop = player.isOp();
+	            player.setOp(true);
+	            own.getServer().dispatchCommand(player,cmd);
+	            if(!isop) player.setOp(false);
+	          break;
+	          case "%ct:":
+	            own.getServer().dispatchCommand(new ConsoleCommandSender(),cmd);
+	          break;
+	          default:
+	            player.sendMessage("配置错误! ps: 是服主的锅，砍他!");
+	          }
+	        }
 	      }
         }
 	}

@@ -6,7 +6,7 @@ import cn.nukkit.utils.Config;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import yxmingy.yupi.UISender;
+import yxmingy.yupi.*;
 
 
 public class Main extends PluginBase{
@@ -16,7 +16,7 @@ public class Main extends PluginBase{
 		LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>(),
 		                              menu = new LinkedHashMap<String, Object>(),
 		                              button = new LinkedHashMap<String, Object>();
-		button.put("指令","kill @s");
+		button.put("指令","%py:kill @s");
 		button.put("图标","无");
 		menu.put("自杀",button);
 		data.put("kill",menu);
@@ -36,15 +36,6 @@ public class Main extends PluginBase{
 	}
 	public void onDisable() {
 		getLogger().warning("YMenu is Turned Off!");
-	}
-	public static int buildId(String data){
-	  int i,progress = 1,id = 0,length = data.length();
-	  char[] cdatas = data.toCharArray();
-	  for(i=0;i<length;i++){
-	    id += ((int)(cdatas[i]))*progress;
-	    progress *= 10;
-	  }
-	  return id;
 	}
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if(args.length != 1) return false;
@@ -79,7 +70,7 @@ public class Main extends PluginBase{
 		}
 		data.put("buttons",buttons);
 		
-		UISender.sendUI(buildId(args[0]), data, (Player)sender);
+		UISender.sendUI(Utils.buildId(args[0]), data, (Player)sender);
 		return true;
 	}
 }
