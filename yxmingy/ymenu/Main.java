@@ -10,7 +10,7 @@ import yxmingy.yupi.UISender;
 
 
 public class Main extends PluginBase{
-	private Config conf;
+	public Config conf;
 	public void onEnable() {
 		getLogger().notice("YMenu is Enabled! Author: xMing.");
 		LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>(),
@@ -32,10 +32,19 @@ public class Main extends PluginBase{
 		 *   ]
 		 * ]
 		 */
-		getServer().getPluginManager().registerEvents(new Responser(), this);
+		getServer().getPluginManager().registerEvents(new Responser(this), this);
 	}
 	public void onDisable() {
 		getLogger().warning("YMenu is Turned Off!");
+	}
+	public static int buildId(String data){
+	  int i,progress = 1,id = 0,length = data.length();
+	  char[] cdatas = data.toCharArray();
+	  for(i=0;i<length;i++){
+	    id += ((int)(cdatas[i]))*progress;
+	    progress *= 10;
+	  }
+	  return id;
 	}
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if(args.length != 1) return false;
@@ -70,7 +79,7 @@ public class Main extends PluginBase{
 		}
 		data.put("buttons",buttons);
 		
-		UISender.sendUI(526817087, data, (Player)sender);
+		UISender.sendUI(buildId(args[0]), data, (Player)sender);
 		return true;
 	}
 }
