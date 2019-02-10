@@ -20,7 +20,7 @@ public class Responser extends ResponserBase{
 	          String sender,cmd;
 	          cmd = (String)button.get("指令");
 	          sender = cmd.substring(0,4);
-	          cmd = cmd.substring(5);
+	          cmd = cmd.substring(4);
 	          cmd = cmd.replaceAll("@s",player.getName());
 	          switch(sender){
 	          case "%py:":
