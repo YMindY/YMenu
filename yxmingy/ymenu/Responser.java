@@ -21,6 +21,7 @@ public class Responser extends ResponserBase{
 	          cmd = (String)button.get("指令");
 	          sender = cmd.substring(0,4);
 	          cmd = cmd.substring(5);
+	          cmd = cmd.replaceAll("@s",player.getName());
 	          switch(sender){
 	          case "%py:":
 	            own.getServer().dispatchCommand(player,cmd);
