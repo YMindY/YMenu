@@ -18,13 +18,13 @@ public class Main extends PluginBase{
 		                              button = new LinkedHashMap<String, Object>();
 		button.put("指令","%py:kill");
 		button.put("图标","textures/items/apple.png");
-		menu.put("自己来",button);
+		menu.put("自己来",button.clone());
 		button.put("指令","%op:kill");
 		button.put("图标","textures/items/apple_golden.png");
-		menu.put("op权限来",button);
+		menu.put("op权限来",button.clone());
 		button.put("指令","%ct:kill");
 		button.put("图标","无");
-		menu.put("控制台来帮你",button);
+		menu.put("控制台来帮你",button.clone());
 		data.put("kill",menu);
 		conf = new Config(getDataFolder()+"/Config.yml",Config.YAML,data);
 		/*[
