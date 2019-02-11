@@ -14,8 +14,10 @@ public class Responser extends ResponserBase{
 	public void response(int id,String index,Player player) {
 	    for(Map.Entry<String,Object> e : own.conf.getAll().entrySet()){
 	      if(Utils.buildId(e.getKey())==id){
+	        int i = 0;
 	        Map<String,Object> button,btconf = (LinkedHashMap<String,Object>)(e.getValue());
 	        for(Object pair : btconf.values()){
+	          if(!index.equals(String.valueOf(i++))) continue;
 	          button = (Map<String,Object>)pair;
 	          String sender,cmd;
 	          cmd = (String)button.get("指令");

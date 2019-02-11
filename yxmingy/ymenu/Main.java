@@ -16,9 +16,15 @@ public class Main extends PluginBase{
 		LinkedHashMap<String, Object> data = new LinkedHashMap<String, Object>(),
 		                              menu = new LinkedHashMap<String, Object>(),
 		                              button = new LinkedHashMap<String, Object>();
-		button.put("指令","%py:kill @s");
+		button.put("指令","%py:kill");
+		button.put("图标","textures/items/apple.png");
+		menu.put("自己来",button);
+		button.put("指令","%op:kill");
+		button.put("图标","textures/items/apple_golden.png");
+		menu.put("op权限来",button);
+		button.put("指令","%ct:kill");
 		button.put("图标","无");
-		menu.put("自杀",button);
+		menu.put("控制台来帮你",button);
 		data.put("kill",menu);
 		conf = new Config(getDataFolder()+"/Config.yml",Config.YAML,data);
 		/*[
