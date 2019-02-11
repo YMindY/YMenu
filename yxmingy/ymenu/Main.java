@@ -3,10 +3,8 @@ import cn.nukkit.Player;
 import cn.nukkit.command.*;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import yxmingy.yupi.*;
+import java.util.*;
+import yxmingy.yupi.ui.MultiOption;
 
 
 public class Main extends PluginBase{
@@ -53,30 +51,20 @@ public class Main extends PluginBase{
 			sender.sendMessage("控制台去死！");
 			return true;
 		}
-		Map<String, Object> data = new LinkedHashMap<String, Object>(),
-		                    pair,button,image,btconf;
-		btconf = (LinkedHashMap<String,Object>)(conf.get(args[0]));
-		ArrayList<Map<String, Object>> buttons = new ArrayList<Map<String, Object>>();
+		MultiOption ui = new MultiOption(args[0]);
+		ui.setContent("");
+		Map<String, Object> pair,btconf = (LinkedHashMap<String,Object>)(conf.get(args[0]));
 		String imagepath;
-		data.put("type", "form");
-		data.put("title", args[0]);
-		data.put("content","");
 		for(Map.Entry<String, Object> entry : btconf.entrySet()){
 		    pair = (Map<String,Object>)entry.getValue();
-		    button = new LinkedHashMap<String, Object>();
-		    button.put("text",entry.getKey());
 		    imagepath = (String)pair.get("图标");
 		    if(!(imagepath.equals("无"))){
-		        image = new LinkedHashMap<String, Object>();
-		        image.put("type","path");
-		        image.put("data",imagepath);
-		        button.put("image",image);
+		        ui.addButton(entry.getKey(),true,imagepath);
+		    }else{
+		      ui.addButton(entry.getKey());
 		    }
-		    buttons.add(button);
 		}
-		data.put("buttons",buttons);
-		
-		UISender.sendUI(Utils.buildId(args[0]), data, (Player)sender);
+		ui.send((Player)sender);
 		return true;
 	}
 }
