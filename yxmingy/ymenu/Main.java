@@ -22,10 +22,10 @@ public class Main extends PluginBase{
 		button.put("指令","%op:kill");
 		button.put("图标","textures/items/apple_golden.png");
 		menu.put("op权限来",button.clone());
-		button.put("指令","%ct:kill");
+		button.put("指令","%ct:kill @s");
 		button.put("图标","无");
-		menu.put("控制台来帮你",button.clone());
-		data.put("kill",menu);
+		menu.put("控制台来帮你",button);
+		data.put("自杀",menu);
 		conf = new Config(getDataFolder()+"/Config.yml",Config.YAML,data);
 		/*[
 		 * {菜单名}=>
