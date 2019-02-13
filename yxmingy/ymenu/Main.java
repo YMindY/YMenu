@@ -64,6 +64,7 @@ public class Main extends PluginBase{
 		      ui.addButton(entry.getKey());
 		    }
 		}
+		ui.setHandler(new Handler(args[0],this));
 		ui.send((Player)sender);
 		return true;
 	}
