@@ -36,7 +36,6 @@ public class Main extends PluginBase{
 		 *   ]
 		 * ]
 		 */
-		getServer().getPluginManager().registerEvents(new Responser(this), this);
 	}
 	public void onDisable() {
 		getLogger().warning("YMenu is Turned Off!");
